@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perrito Te Amo</title>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+        }
+
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.6);
+            font-size: 20px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-20px) rotate(360deg); opacity: 0; }
+        }
+
+        .dog-container {
+            position: absolute;
+            bottom: 150px;
+            left: -100px;
+            width: 80px;
+            height: 80px;
+            animation: walk 8s linear infinite;
+        }
+
+        @keyframes walk {
+            0% { left: -100px; }
+            100% { left: calc(100% + 100px); }
+        }
+
+        .dog {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            animation: bounce 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-5px); }
+        }
+
+        .dog::before {
+            content: '🐕';
+            font-size: 60px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .letters-container {
+            position: absolute;
+            bottom: 200px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .letter {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ff1493;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: scale(0) rotate(180deg);
+            animation: dropLetter 0.8s ease-out forwards;
+            text-decoration: none;
+        }
+
+        @keyframes dropLetter {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(180deg) translateY(-100px);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2) rotate(0deg) translateY(0px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg) translateY(0px);
+            }
+        }
+
+        .letter:nth-child(1) { animation-delay: 1s; }
+        .letter:nth-child(2) { animation-delay: 2.5s; }
+        .letter:nth-child(3) { animation-delay: 4s; }
+        .letter:nth-child(4) { animation-delay: 5.5s; }
+        .letter:nth-child(5) { animation-delay: 7s; }
+
+        .final-message {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #ff1493;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
+            animation-delay: 8s;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            100% { opacity: 1; transform: translateX(-50%) translateY(0px); }
+        }
+
+        .restart-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #ff1493;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            background: #ff69b4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+        }
+
+        .paw-prints {
+            position: absolute;
+            bottom: 130px;
+            left: 0;
+            width: 100%;
+            height: 30px;
+        }
+
+        .paw {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(139, 69, 19, 0.4);
+            opacity: 0;
+            animation: showPaw 0.5s ease-in forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="dog-container">
+        <div class="dog"></div>
+    </div>
+
+    <div class="letters-container">
+        <div class="letter">T</div>
+        <div class="letter">e</div>
+        <div class="letter">&nbsp;</div>
+        <div class="letter">A</div>
+        <div class="letter">m</div>
+        <div class="letter">o</div>
+    </div>
+
+    <div class="paw-prints" id="pawPrints"></div>
+
+    <div class="final-message">
+        💕 Con amor de tu perrito fiel 💕
+    </div>
+
+    <button class="restart-btn" onclick="restartAnimation()">🔄 Repetir</button>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 4 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        function createPawPrint(position) {
+            const paw = document.createElement('div');
+            paw.className = 'paw';
+            paw.innerHTML = '🐾';
+            paw.style.left = position + 'px';
+            paw.style.animationDelay = '0.5s';
+            document.getElementById('pawPrints').appendChild(paw);
+        }
+
+        function restartAnimation() {
+            // Reiniciar todas las animaciones
+            document.querySelector('.dog-container').style.animation = 'none';
+            document.querySelectorAll('.letter').forEach(letter => {
+                letter.style.animation = 'none';
+                letter.style.opacity = '0';
+            });
+            document.querySelector('.final-message').style.animation = 'none';
+            document.querySelector('.final-message').style.opacity = '0';
+            
+            // Limpiar huellas
+            document.getElementById('pawPrints').innerHTML = '';
+            
+            // Reiniciar después de un pequeño delay
+            setTimeout(() => {
+                document.querySelector('.dog-container').style.animation = 'walk 8s linear infinite';
+                document.querySelectorAll('.letter').forEach((letter, index) => {
+                    letter.style.animation = "dropLetter 0.8s ease-out forwards";
+                    letter.style.animationDelay = (1 + index * 1.5) + 's';
+                });
+                document.querySelector('.final-message').style.animation = 'fadeIn 2s ease-in forwards';
+                document.querySelector('.final-message').style.animationDelay = '8s';
+                
+                // Crear huellas mientras camina
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        createPawPrint(50 + i * 80);
+                    }, i * 500);
+                }
+            }, 100);
+        }
+
+        // Crear corazones flotantes
+        setInterval(createHeart, 1000);
+
+        // Crear huellas iniciales
+        for (let i = 0; i < 15; i++) {
+            setTimeout(() => {
+                createPawPrint(50 + i * 80);
+            }, i * 500);
+        }
+
+        // Crear corazones iniciales
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createHeart, i * 500);
+        }
+    </script>
+</body>
+</html>
