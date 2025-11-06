@@ -3,273 +3,284 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perrito Te Amo</title>
+<title>🐧 Mundo Linux</title>
+
 <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-            height: 100vh;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            position: relative;
-        }
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #0b0c10, #1f2833);
+    color: #f5f5f5;
+    scroll-behavior: smooth;
+  }
 
-        .hearts {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
+  header {
+    background: linear-gradient(135deg, #00ff99, #0077ff);
+    padding: 50px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
 
-        .heart {
-            position: absolute;
-            color: rgba(255, 182, 193, 0.6);
-            font-size: 20px;
-            animation: float 4s ease-in-out infinite;
-        }
+  header h1 {
+    color: #fff;
+    font-size: 3em;
+    margin: 0;
+  }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-20px) rotate(360deg); opacity: 0; }
-        }
+  header p {
+    color: #e0e0e0;
+    font-size: 1.3em;
+    margin-top: 10px;
+  }
 
-        .dog-container {
-            position: absolute;
-            bottom: 150px;
-            left: -100px;
-            width: 80px;
-            height: 80px;
-            animation: walk 8s linear infinite;
-        }
+  header img {
+    position: absolute;
+    width: 130px;
+    right: 40px;
+    bottom: -5px;
+    animation: flotar 4s ease-in-out infinite;
+  }
 
-        @keyframes walk {
-            0% { left: -100px; }
-            100% { left: calc(100% + 100px); }
-        }
+  @keyframes flotar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
 
-        .dog {
-            width: 80px;
-            height: 80px;
-            position: relative;
-            animation: bounce 0.5s ease-in-out infinite alternate;
-        }
+  nav {
+    background-color: #15181f;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 15px;
+    flex-wrap: wrap;
+  }
 
-        @keyframes bounce {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-5px); }
-        }
+  nav a {
+    color: #00ff99;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
 
-        .dog::before {
-            content: '🐕';
-            font-size: 60px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
-        }
+  nav a:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+  }
 
-        .letters-container {
-            position: absolute;
-            bottom: 200px;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 50px;
-        }
+  section {
+    padding: 50px 25px;
+    max-width: 1200px;
+    margin: auto;
+  }
 
-        .letter {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #ff1493;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            opacity: 0;
-            transform: scale(0) rotate(180deg);
-            animation: dropLetter 0.8s ease-out forwards;
-            text-decoration: none;
-        }
+  h2 {
+    color: #00ff99;
+    border-bottom: 2px solid #00ff99;
+    padding-bottom: 8px;
+    text-align: center;
+  }
 
-        @keyframes dropLetter {
-            0% {
-                opacity: 0;
-                transform: scale(0) rotate(180deg) translateY(-100px);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.2) rotate(0deg) translateY(0px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) rotate(0deg) translateY(0px);
-            }
-        }
+  .content {
+    text-align: center;
+    font-size: 1.1em;
+    color: #cccccc;
+    line-height: 1.8em;
+    margin-top: 20px;
+  }
 
-        .letter:nth-child(1) { animation-delay: 1s; }
-        .letter:nth-child(2) { animation-delay: 2.5s; }
-        .letter:nth-child(3) { animation-delay: 4s; }
-        .letter:nth-child(4) { animation-delay: 5.5s; }
-        .letter:nth-child(5) { animation-delay: 7s; }
+  .distros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+  }
 
-        .final-message {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.5rem;
-            color: #ff1493;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 2s ease-in forwards;
-            animation-delay: 8s;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+  .card {
+    background-color: #20252d;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,255,153,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            100% { opacity: 1; transform: translateX(-50%) translateY(0px); }
-        }
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(0,255,153,0.5);
+  }
 
-        .restart-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background: #ff1493;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
-            transition: all 0.3s ease;
-        }
+  .card img {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 15px;
+  }
 
-        .restart-btn:hover {
-            background: #ff69b4;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
-        }
+  .btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #00ff99, #0077ff);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
 
-        .paw-prints {
-            position: absolute;
-            bottom: 130px;
-            left: 0;
-            width: 100%;
-            height: 30px;
-        }
+  .btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #00cc7a, #005ad6);
+  }
 
-        .paw {
-            position: absolute;
-            font-size: 20px;
-            color: rgba(139, 69, 19, 0.4);
-            opacity: 0;
-            animation: showPaw 0.5s ease-in forwards;
-        }
-    </style>
+  footer {
+    text-align: center;
+    padding: 25px;
+    background-color: #15181f;
+    color: #aaa;
+  }
+
+  footer a {
+    color: #00ff99;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  footer a:hover {
+    color: #fff;
+  }
+</style>
 </head>
+
 <body>
-    <div class="hearts" id="hearts"></div>
-    
-    <div class="dog-container">
-        <div class="dog"></div>
+
+<header>
+  <h1>🐧 Mundo Linux</h1>
+  <p>Explora las mejores distribuciones y descubre por qué Linux es el futuro del software libre.</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Pingüino Linux">
+</header>
+
+<nav>
+  <a href="#quees">¿Qué es Linux?</a>
+  <a href="#ventajas">Ventajas</a>
+  <a href="#usos">Usos</a>
+  <a href="#distros">Distribuciones</a>
+  <a href="https://www.linux.org/" target="_blank">Página oficial</a>
+</nav>
+
+<section id="quees">
+  <h2>¿Qué es Linux?</h2>
+  <div class="content">
+    Linux es un sistema operativo de código abierto basado en UNIX, creado por Linus Torvalds en 1991.  
+    Es usado por millones de personas en el mundo gracias a su estabilidad, seguridad y libertad.  
+    El núcleo del sistema (kernel) puede combinarse con diferentes entornos y herramientas, creando miles de versiones únicas llamadas <strong>distribuciones</strong>.
+  </div>
+</section>
+
+<section id="ventajas">
+  <h2>Ventajas de Linux</h2>
+  <div class="content">
+    <ul style="list-style:none; padding:0;">
+      <li>✅ Gratuito y de código abierto.</li>
+      <li>🔒 Seguro frente a virus y malware.</li>
+      <li>⚡ Ligero, rápido y estable.</li>
+      <li>🧩 Altamente personalizable.</li>
+      <li>🌎 Gran comunidad mundial.</li>
+      <li>💻 Ideal para servidores, desarrolladores y usuarios avanzados.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="usos">
+  <h2>¿Dónde se usa Linux?</h2>
+  <div class="content">
+    Linux está presente en servidores, supercomputadoras, automóviles, teléfonos Android, routers, televisores inteligentes y mucho más.  
+    Empresas como Google, Amazon, IBM y Meta utilizan Linux para sus servidores y servicios en la nube.
+  </div>
+</section>
+
+<section id="distros">
+  <h2>Distribuciones Populares</h2>
+  <div class="distros">
+
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu">
+      <h3>Ubuntu</h3>
+      <p>Fácil de usar, popular entre principiantes y muy estable.</p>
+      <a href="https://ubuntu.com/download" target="_blank" class="btn">Descargar</a>
     </div>
 
-    <div class="letters-container">
-        <div class="letter">T</div>
-        <div class="letter">e</div>
-        <div class="letter">&nbsp;</div>
-        <div class="letter">A</div>
-        <div class="letter">m</div>
-        <div class="letter">o</div>
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fedora_logo.svg" alt="Fedora">
+      <h3>Fedora</h3>
+      <p>Patrocinada por Red Hat, enfocada en tecnología de punta.</p>
+      <a href="https://getfedora.org/" target="_blank" class="btn">Descargar</a>
     </div>
 
-    <div class="paw-prints" id="pawPrints"></div>
-
-    <div class="final-message">
-        💕 Con amor de tu perrito fiel 💕
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Debian-OpenLogo.svg" alt="Debian">
+      <h3>Debian</h3>
+      <p>Base de muchas distribuciones. Famosa por su estabilidad.</p>
+      <a href="https://www.debian.org/download" target="_blank" class="btn">Descargar</a>
     </div>
 
-    <button class="restart-btn" onclick="restartAnimation()">🔄 Repetir</button>
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREn2jqA0Zlf1hIagOYOebi2CRYm4vzKaLVLQ&s" alt="Arch Linux">
+      <h3>Arch Linux</h3>
+      <p>Minimalista y para usuarios avanzados que buscan control total.</p>
+      <a href="https://archlinux.org/download/" target="_blank" class="btn">Descargar</a>
+    </div>
 
-    <script>
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.innerHTML = '💖';
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.animationDelay = Math.random() * 4 + 's';
-            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            document.getElementById('hearts').appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 7000);
-        }
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQT6WoAQbHcZQtfKRPHvtunrfNlUHVuLIW3A&s" alt="Linux Mint">
+      <h3>Linux Mint</h3>
+      <p>Basado en Ubuntu, rápido, elegante y fácil de usar.</p>
+      <a href="https://linuxmint.com/download.php" target="_blank" class="btn">Descargar</a>
+    </div>
 
-        function createPawPrint(position) {
-            const paw = document.createElement('div');
-            paw.className = 'paw';
-            paw.innerHTML = '🐾';
-            paw.style.left = position + 'px';
-            paw.style.animationDelay = '0.5s';
-            document.getElementById('pawPrints').appendChild(paw);
-        }
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Kali-dragon-icon.svg" alt="Kali Linux">
+      <h3>Kali Linux</h3>
+      <p>Diseñado para ciberseguridad y pruebas de penetración.</p>
+      <a href="https://www.kali.org/get-kali/" target="_blank" class="btn">Descargar</a>
+    </div>
 
-        function restartAnimation() {
-            // Reiniciar todas las animaciones
-            document.querySelector('.dog-container').style.animation = 'none';
-            document.querySelectorAll('.letter').forEach(letter => {
-                letter.style.animation = 'none';
-                letter.style.opacity = '0';
-            });
-            document.querySelector('.final-message').style.animation = 'none';
-            document.querySelector('.final-message').style.opacity = '0';
-            
-            // Limpiar huellas
-            document.getElementById('pawPrints').innerHTML = '';
-            
-            // Reiniciar después de un pequeño delay
-            setTimeout(() => {
-                document.querySelector('.dog-container').style.animation = 'walk 8s linear infinite';
-                document.querySelectorAll('.letter').forEach((letter, index) => {
-                    letter.style.animation = "dropLetter 0.8s ease-out forwards";
-                    letter.style.animationDelay = (1 + index * 1.5) + 's';
-                });
-                document.querySelector('.final-message').style.animation = 'fadeIn 2s ease-in forwards';
-                document.querySelector('.final-message').style.animationDelay = '8s';
-                
-                // Crear huellas mientras camina
-                for (let i = 0; i < 15; i++) {
-                    setTimeout(() => {
-                        createPawPrint(50 + i * 80);
-                    }, i * 500);
-                }
-            }, 100);
-        }
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Manjaro-logo.svg" alt="Manjaro Linux">
+      <h3>Manjaro</h3>
+      <p>Basado en Arch, combina rendimiento y facilidad de uso.</p>
+      <a href="https://manjaro.org/download/" target="_blank" class="btn">Descargar</a>
+    </div>
 
-        // Crear corazones flotantes
-        setInterval(createHeart, 1000);
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-C11M7GP1qTHJq3nKxGe5D99FVfSOZ3PSFA&s" alt="openSUSE">
+      <h3>openSUSE</h3>
+      <p>Potente, estable y con herramientas profesionales.</p>
+      <a href="https://www.opensuse.org/" target="_blank" class="btn">Descargar</a>
+    </div>
 
-        // Crear huellas iniciales
-        for (let i = 0; i < 15; i++) {
-            setTimeout(() => {
-                createPawPrint(50 + i * 80);
-            }, i * 500);
-        }
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi6btEDXAc6n-_C-3H4bJr5l6xOl9z2GtsBg&s" alt="Zorin OS">
+      <h3>Zorin OS</h3>
+      <p>Ideal para quienes migran de Windows. Diseño elegante.</p>
+      <a href="https://zorin.com/os/download/" target="_blank" class="btn">Descargar</a>
+    </div>
 
-        // Crear corazones iniciales
-        for (let i = 0; i < 5; i++) {
-            setTimeout(createHeart, i * 500);
-        }
-    </script>
+    <div class="card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUvMsWgO3nARcrAlfDyr90-vFEaHXB7ZL6-w&s" alt="Pop!_OS">
+      <h3>Pop!_OS</h3>
+      <p>Optimizado para desarrolladores y gamers. Fluido y moderno.</p>
+      <a href="https://pop.system76.com/" target="_blank" class="btn">Descargar</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>Más información en <a href="https://www.linux.org/" target="_blank">Linux.org</a></p>
+  <p>© 2025 Mundo Linux </p>
+</footer>
+
 </body>
 </html>
